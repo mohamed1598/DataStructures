@@ -9,7 +9,8 @@ namespace DataStructures
 {
     public class CQueue<T> : IEnumerable<T>
     {
-        List<T> list = new List<T>();
+        protected List<T> list = new List<T>();
+        public QueueIteratorBehavior queueIteratorBehavior { get; set; } = QueueIteratorBehavior.PeekWhenIterate;
 
         public CQueue(List<T> list, QueueIteratorBehavior queueIteratorBehavior = QueueIteratorBehavior.PeekWhenIterate)
         {
@@ -17,12 +18,11 @@ namespace DataStructures
             this.queueIteratorBehavior = queueIteratorBehavior;
         }
 
-        public CQueue(CQueue<T>.QueueIteratorBehavior queueIteratorBehavior = QueueIteratorBehavior.PeekWhenIterate)
+        public CQueue(QueueIteratorBehavior queueIteratorBehavior = QueueIteratorBehavior.PeekWhenIterate)
         {
             this.queueIteratorBehavior = queueIteratorBehavior;
         }
 
-        public QueueIteratorBehavior queueIteratorBehavior { get; set; } = QueueIteratorBehavior.PeekWhenIterate;
 
         public T Dequeue()
         {
@@ -82,7 +82,7 @@ namespace DataStructures
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new StackEnumerator(list, queueIteratorBehavior);
+            return new QueueEnumerator(list, queueIteratorBehavior);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -90,12 +90,12 @@ namespace DataStructures
             return this.GetEnumerator();
         }
 
-        private class StackEnumerator : IEnumerator<T>
+        private class QueueEnumerator : IEnumerator<T>
         {
             private List<T> list = new List<T>();
             private int currentIndex = -1;
             public QueueIteratorBehavior queueIteratorBehavior { get; set; } = QueueIteratorBehavior.PeekWhenIterate;
-            public StackEnumerator(List<T> list, QueueIteratorBehavior queueIteratorBehavior = QueueIteratorBehavior.PeekWhenIterate)
+            public QueueEnumerator(List<T> list, QueueIteratorBehavior queueIteratorBehavior = QueueIteratorBehavior.PeekWhenIterate)
             {
                 this.list = list;
                 this.queueIteratorBehavior = queueIteratorBehavior;
@@ -126,11 +126,11 @@ namespace DataStructures
             }
         }
 
-        public enum QueueIteratorBehavior
-        {
-            DequeueWhenIterate,
-            PeekWhenIterate
-        }
+    }
+    public enum QueueIteratorBehavior
+    {
+        DequeueWhenIterate,
+        PeekWhenIterate
     }
 
 }

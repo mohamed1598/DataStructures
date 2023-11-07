@@ -11,13 +11,13 @@ namespace DataStructures
     {
         List<T> list = new List<T>();
 
-        public CStack(List<T> list, CStack<T>.IteratorBehavior iteratorBehavior = IteratorBehavior.PeekWhenIterate)
+        public CStack(List<T> list, IteratorBehavior iteratorBehavior = IteratorBehavior.PeekWhenIterate)
         {
             this.list = list;
             this.iteratorBehavior = iteratorBehavior;
         }
 
-        public CStack(CStack<T>.IteratorBehavior iteratorBehavior = IteratorBehavior.PeekWhenIterate)
+        public CStack(IteratorBehavior iteratorBehavior = IteratorBehavior.PeekWhenIterate)
         {
             this.iteratorBehavior = iteratorBehavior;
         }
@@ -126,10 +126,10 @@ namespace DataStructures
             }
         }
 
-        public enum IteratorBehavior
-        {
-            PopWhenIterate,
-            PeekWhenIterate
-        }
+    }
+    public enum IteratorBehavior
+    {
+        PopWhenIterate,
+        PeekWhenIterate
     }
 }
