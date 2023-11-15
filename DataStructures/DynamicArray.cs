@@ -38,10 +38,17 @@ namespace DataStructures
             {
                 if (value > size)
                     if (value > size + 16)
+                    {
                         Array.Resize(ref array, value);
+                        size = value;
+                    }
                     else
+                    {
                         Array.Resize(ref array, size + 16);
-                size = value;
+                        size += 16;
+                    }
+                        
+                
             }
         }
 
@@ -133,7 +140,7 @@ namespace DataStructures
         {
             for (int i = index; i < Length - 2; i++)
             {
-                array[i] = array[i - 1];
+                array[i] = array[i + 1];
             }
             array[length - 1] = default(T);
             Length = Length - 1;
@@ -154,7 +161,7 @@ namespace DataStructures
         public T[] ToArray()
         {
             TrimToSize();
-            return array[0.. Length];
+            return array;
         }
 
         public void Sort()
